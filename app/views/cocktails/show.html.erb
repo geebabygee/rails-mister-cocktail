@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      <h1><%= @cocktail.name %></h1>
+    </div>
+  </div>
+  <ul>
+    <% if @cocktail.doses.any? %>
+      <% @cocktail.doses.each do |dose| %>
+        <li><%= dose.description %> of <%= dose.ingredient.name %><%= link_to dose_path(dose, @cocktail), method: :delete do %>
+            <i class="fa fa-trash"></i>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <h5>Add a new ingredient</h5>
+  <%= simple_form_for [@cocktail, @dose] do |f| %>
+    <%= f.input :description%>
+    <%= f.association :ingredient%>
+    <%= f.submit "Add a dose", class: "btn btn-danger" %>
+  <% end %>
+  <br>
+  <%= link_to "Back to Cocktails", cocktails_path, class: "btn btn-danger"%>
+</div>

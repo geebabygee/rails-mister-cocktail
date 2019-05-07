@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="row">
+    <%= simple_form_for @cocktail do |f| %>
+      <%= f.input :name, class:"big-input"%>
+      <%= f.submit "Add a cocktail", class: "btn btn-danger" %>
+    <% end %>
+  </div>
+</div>
