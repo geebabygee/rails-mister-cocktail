@@ -3,6 +3,7 @@ class CocktailsController < ApplicationController
   before_action :set_cocktail, only: [:show, :edit, :update, :destroy]
   def index
     @cocktails = Cocktail.all
+    @cocktail = Cocktail.all.sample #this is just for the banner!
   end
 
   def show
@@ -43,6 +44,6 @@ class CocktailsController < ApplicationController
   end
 
   def cocktail_params
-    params.require(:cocktail).permit(:name)
+    params.require(:cocktail).permit(:name, :photo)
   end
 end

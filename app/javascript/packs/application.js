@@ -17,3 +17,14 @@
 
 console.log('Hello World from Webpacker')
 import 'bootstrap';
+
+import { loadDynamicBannerText } from 'components/banner';
+loadDynamicBannerText();
+
+import 'select2/dist/css/select2.css';
+import { initSelect2 } from 'components/init_select2';
+
+initSelect2();
+
+
+// import '../components/select2';

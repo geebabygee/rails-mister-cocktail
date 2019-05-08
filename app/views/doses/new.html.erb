@@ -3,7 +3,7 @@
   <div class="row">
     <%= simple_form_for [@cocktail, @dose] do |f| %>
       <%= f.input :description%>
-      <%= f.association :ingredient%>
+      <%= f.association :ingredient, class: "select2"%>
       <%= f.submit "Add a dose", class: "btn btn-danger" %>
     <% end %>
   </div>

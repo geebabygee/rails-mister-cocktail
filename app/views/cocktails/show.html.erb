@@ -1,23 +1,51 @@
-<div class="container">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cl_image_path @cocktail.photo, height: 300, width: 400 %>');">
+  <div class="container">
+    <h1 class="text-center"><%= @cocktail.name %></h1>
+  </div>
+</div>
+<br>
+<div class="container margin-bottom">
   <div class="row">
-    <div class="col-xs-6">
-      <h1><%= @cocktail.name %></h1>
+    <div class="col-sm-12 col-md-6">
+      <table class="table table-bordered">
+        <tbody>
+          <% if @cocktail.doses.any? %>
+            <thead>
+              <th>Ingredient</th>
+              <th>Description</th>
+              <th>Delete</th>
+            </thead>
+            <% @cocktail.doses.each do |dose| %>
+              <tr>
+                <td><%= dose.description %></td>
+                <td><%= dose.ingredient.name %></td>
+                <td>
+                  <%= link_to dose_path(dose), method: :delete do %>
+                    <i class="fa fa-trash destroy_dose"></i>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+              <% end %>
+              <td><%= link_to new_cocktail_dose_path(@cocktail), class: "text-add" do %>
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% else %>
+            <p>This cocktail has no ingredients yet!</p>
+            <%= link_to "Add Ingredient", new_cocktail_dose_path(@cocktail) ,class:"btn btn-primary"%>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
-  <ul>
-    <% if @cocktail.doses.any? %>
-      <% @cocktail.doses.each do |dose| %>
-        <li><%= dose.description %> of <%= dose.ingredient.name %><%= link_to dose_path(dose, @cocktail), method: :delete do %>
-            <i class="fa fa-trash"></i>
-          <% end %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
+</div>
+<div class="container">
   <h5>Add a new ingredient</h5>
   <%= simple_form_for [@cocktail, @dose] do |f| %>
     <%= f.input :description%>
-    <%= f.association :ingredient%>
+    <%= f.association :ingredient, input_html: { class: 'select2' }  %>
     <%= f.submit "Add a dose", class: "btn btn-danger" %>
   <% end %>
   <br>
