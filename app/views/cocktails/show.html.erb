@@ -49,5 +49,18 @@
     <%= f.submit "Add a dose", class: "btn btn-danger" %>
   <% end %>
   <br>
-  <%= link_to "Back to Cocktails", cocktails_path, class: "btn btn-danger"%>
+</div>
+<div class="container">
+  <h5>Add a new review</h5>
+  <%= simple_form_for [@cocktail, @review] do |f| %>
+    <%= f.input :content%>
+    <%= f.input :rating%>
+    <%= f.submit "Add a review", class: "btn btn-danger" %>
+  <% end %>
+  <br>
+  <% @cocktail.reviews.each do |review| %>
+    <li><%= review.rating %> - <%= review.content %></li>
+  <% end %>
+  <br>
+  <%= link_to "Back to Cocktails", cocktails_path, class: "btn btn-primary"%>
 </div>
